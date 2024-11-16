@@ -1,38 +1,44 @@
-.App {
-  text-align: center;
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.container {
+  padding: 20px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  height: 90vh; /* 高度占满屏幕 */
+}
+
+.left {
+  display: grid;
+  width: 75%; /* 左边部分占屏幕宽度的25% */
+  height: 90vh; /* 高度占屏幕的100% */
+  background-color: lightblue; /* 背景色可以根据需求调整 */
+  
+}
+
+.right {
+  display: flex;
+  flex-direction: column; /* 垂直方向排布 */
+  width: 25%; /* 右边部分占屏幕宽度的75% */
+}
+
+.right-top{
+  height: 20%;
+  background-color: lightgreen;
+}
+.right-mid{
+  height: 60%;
+  background-color: lightgreen; /* 背景色可以根据需求调整 */
+}
+.right-bottom {
+  display: flex;
+  height: 20%;
+  background-color: lightgreen;
+  flex-direction: row;
+  flex-wrap: nowrap;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  align-items: center;
+  gap: 10px;
 }
