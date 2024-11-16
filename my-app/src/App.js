@@ -2,6 +2,7 @@ import './App.css';
 import { Row, Col, Button } from 'antd';
 import { useState } from 'react';
 import DisplayBtn from './displayBtn/displayBtn';
+import MapLoader from "./levelSelection"
 
 function App() {
   const [row, setRow] = useState(4)
@@ -9,11 +10,12 @@ function App() {
   return (
     <div className="container">
       <div className="left" style={{ display: "gird", gridTemplateRows: `repeat(${row}, 1fr)`, gridTemplateColumns: `repeat(${col}, 1fr)` }}>
-        {[...Array(row * col)].map((_, index) => (
+        {/* {[...Array(row * col)].map((_, index) => (
           <div key={index} className="grid-item">
             {`Item ${index + 1}`}
           </div>
-        ))}
+        ))} */}
+        <MapLoader levelNumber={0} />
       </div>
       <div className="right">
         <div className="right-top">
