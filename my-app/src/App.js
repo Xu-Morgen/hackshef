@@ -1,6 +1,7 @@
 import './App.css';
 import { Row, Col, Button } from 'antd';
 import { useState } from 'react';
+import DisplayBtn from './displayBtn/displayBtn';
 
 function App() {
   const [row, setRow] = useState(4)
@@ -16,7 +17,7 @@ function App() {
       </div>
       <div className="right">
         <div className="right-top">
-          <Button type='primary'>Fun1</Button>
+          <DisplayBtn />
           <Button type='primary'>Fun1</Button>
           <Button type='primary'>Fun1</Button>
           <Button type='primary'>Fun1</Button>
