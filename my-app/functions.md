@@ -1,0 +1,11 @@
+### 待实现的游戏函数
+- startAt(x,y) 在指定坐标开始
+- use(n) 使用n号印章盖一下
+- move(direction,step) 向某方向移动step步
+- goto(lineNumber) 转到代码的某行执行
+- check() 检查当前所在格子的信息
+- if else 不用解释
+- for 或 while 
+- function 实现自定义函数功能
+- 并发和多线程 也许可以实现
+- 面对对象 也许可以实现
