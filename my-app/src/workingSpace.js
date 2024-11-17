@@ -28,6 +28,7 @@ function WorkingSpace({ setCommand, workspaceRef, command }) {
       <block type= 'shapeT'></block>
       <block type= 'shapeL'></block>
       <block type= 'MoveTo'></block>
+      <block type= 'check'></block>
     </xml>
   `;
 
@@ -200,4 +201,22 @@ javascriptGenerator.forBlock['MoveTo'] = function (block, generator) {
   // TODO: Assemble javascript into the code variable.
   const code = `triggerMoveTo(${PositionX},${PositionY});\n`;
   return ILIKESLEEP + code;
+}
+
+
+const check = {
+  init: function () {
+    this.appendDummyInput('check')
+      .setAlign(Blockly.inputs.Align.RIGHT)
+      .appendField('check');
+    this.setOutput(true, null);
+    this.setTooltip('check the information of current block');
+    this.setHelpUrl('');
+    this.setColour(225);
+  }
+};
+Blockly.common.defineBlocks({ check: check });
+javascriptGenerator.forBlock['check'] = function (block, generator) {
+  const code = `triggerCheck()\n`;
+  return [code, Order.NONE];
 }

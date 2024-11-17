@@ -30,7 +30,8 @@ function App() {
   const moveRef = useRef(null); // 用于引用 Gaming 中的 move 方法
   const changeShapeRef = useRef(null);// 用于引用 Gaming 中的 selectShape 方法
   const startAtRef = useRef(null);//用于应用Gaming中的startAt方法
-  const resetRef = useRef({})//用于应用Gaming中的Reset方法
+  const resetRef = useRef({});//用于应用Gaming中的Reset方法
+  const checkRef = useRef({});//用于应用Gaming中的check方法
 
   const triggerColorShape = () => {
     if (colorShapeRef.current) {
@@ -55,6 +56,11 @@ function App() {
       startAtRef.current(x, y)
     }
   }
+  const triggerCheck = () => {
+    if (checkRef.current) {
+      checkRef.current()
+    }
+  }
 
   const [fun, setFun] = useState()
   const [displayFun, setDisplayFun] = useState({})
@@ -70,6 +76,7 @@ function App() {
       alert(e);
       window.LoopTrap = 100;
     }
+    console.log(gridRef.current.map)
     if (!gridRef.current.map.includes("$white")) {
       //jump to homepage
       // const navigate = useNavigate();
@@ -77,6 +84,10 @@ function App() {
       // const handleNavigate = () => {
       //   navigate('/home');
       // };
+    }
+    else {
+      resetRef.current(0)
+      alert("seems like something go wrong")
     }
   }
 
@@ -92,7 +103,7 @@ function App() {
     <div className="container">
       <div className="left" style={{ display: "gird", gridTemplateRows: `repeat(${row}, 1fr)`, gridTemplateColumns: `repeat(${col}, 1fr)` }}>
         <Gaming colorShapeRef={colorShapeRef} moveRef={moveRef} positionRef={positionRef} gridRef={gridRef} changeShapeRef={changeShapeRef}
-          selectedShapeRef={selectedShapeRef} startAtRef={startAtRef} resetRef={resetRef}></Gaming>
+          selectedShapeRef={selectedShapeRef} startAtRef={startAtRef} resetRef={resetRef} checkRef={checkRef}></Gaming>
       </div>
       <div className="right">
         <WorkingSpace setCommand={setCommand} workspaceRef={workspaceRef} command={command}></WorkingSpace>
@@ -127,7 +138,7 @@ const customShapes = {
   // 你可以在这里继续添加更多自定义形状
 };
 
-function Gaming({ colorShapeRef, moveRef, positionRef, gridRef, changeShapeRef, selectedShapeRef, startAtRef, resetRef }) {
+function Gaming({ colorShapeRef, moveRef, positionRef, gridRef, changeShapeRef, selectedShapeRef, startAtRef, resetRef, checkRef }) {
   const [grid, setGrid] = useState(createGrid());
   const [currentPosition, setCurrentPosition] = useState({ row: 0, col: 0 });
   const [selectedShape, setSelectedShape] = useState("L"); // 当前选择的自定义形状
@@ -149,7 +160,7 @@ function Gaming({ colorShapeRef, moveRef, positionRef, gridRef, changeShapeRef, 
   };
 
   const check = () => {
-    return grid.map[currentPosition.row][currentPosition.col].name;
+    return gridRef.current.map[positionRef.current.row][positionRef.current.col].name;
   };
 
   const startAt = (x, y) => {
@@ -188,6 +199,9 @@ function Gaming({ colorShapeRef, moveRef, positionRef, gridRef, changeShapeRef, 
     }
     if (resetRef) {
       resetRef.current = resetGame
+    }
+    if (checkRef) {
+      checkRef.current = check
     }
   }, [currentPosition]);
 
