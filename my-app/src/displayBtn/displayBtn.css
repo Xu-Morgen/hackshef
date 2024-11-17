@@ -1,0 +1,14 @@
+.whole {
+  position: relative;
+}
+
+.btn {
+    position: absolute;
+z-index: 1;
+    width: 50px; /* 按钮的宽度 */
+}
+
+.input {
+    position: absolute;
+  width: 75px; /* 输入框比按钮宽 50% */
+}

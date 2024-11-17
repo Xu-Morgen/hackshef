@@ -4,7 +4,7 @@ import * as libraryBlocks from 'blockly/blocks';
 import { javascriptGenerator } from 'blockly/javascript';
 import * as En from 'blockly/msg/en';
 
-function BlocklyComponent({ toolboxConfig, initialXml, onWorkspaceChange }) {
+function BlocklyComponent({ toolboxConfig, initialXml, onWorkspaceChange, setCommand }) {
   const blocklyDiv = useRef(null); // Blockly 工作区的 DOM 容器
   const workspaceRef = useRef(null); // Blockly 工作区实例
   const [code, setCode] = useState(""); // 用来存储生成的 JavaScript 代码
@@ -35,7 +35,7 @@ function BlocklyComponent({ toolboxConfig, initialXml, onWorkspaceChange }) {
       // 获取并更新工作区中的 JavaScript 代码
       const generatedCode = javascriptGenerator.workspaceToCode(workspace);
       setCode(generatedCode);
-
+      setCommand(generatedCode)
       // // 如果有传入 onWorkspaceChange 回调，则调用它
       // if (onWorkspaceChange) {
       //   const xml = Blockly.Xml.workspaceToDom(workspace);
