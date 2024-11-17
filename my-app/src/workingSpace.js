@@ -62,7 +62,7 @@ javascriptGenerator.forBlock['colorShape'] = function (block, generator) {
   //   return x, y
   // }
   // TODO: Assemble javascript into the code variable.
-  const code = `play();`;
+  const code = `triggerColorShape();`;
 
   return code;
 }
