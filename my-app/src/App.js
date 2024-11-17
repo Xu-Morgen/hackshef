@@ -3,7 +3,6 @@ import { Row, Col, Button } from 'antd';
 import { useState } from 'react';
 import DisplayBtn from './displayBtn/displayBtn';
 import MapLoader from "./levelSelection"
-import { List, use } from 'echarts';
 import WorkingSpace from './workingSpace';
 import Gaming from './gaming';
 
