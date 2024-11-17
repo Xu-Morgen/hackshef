@@ -3,10 +3,16 @@ import { Row, Col, Button } from 'antd';
 import { useState } from 'react';
 import DisplayBtn from './displayBtn/displayBtn';
 import MapLoader from "./levelSelection"
+import { List, use } from 'echarts';
 
 function App() {
   const [row, setRow] = useState(4)
   const [col, setCol] = useState(3)
+  const [funRow, SetFunRow] = useState(3)
+  const [funCol, SetFunCol] = useState(3)
+
+  const [fun, setFun] = useState()
+  const [displayFun, setDisplayFun] = useState({})
   return (
     <div className="container">
       <div className="left" style={{ display: "gird", gridTemplateRows: `repeat(${row}, 1fr)`, gridTemplateColumns: `repeat(${col}, 1fr)` }}>
@@ -18,11 +24,9 @@ function App() {
         <MapLoader levelNumber={0} />
       </div>
       <div className="right">
-        <div className="right-top">
-          <DisplayBtn />
-          <Button type='primary'>Fun1</Button>
-          <Button type='primary'>Fun1</Button>
-          <Button type='primary'>Fun1</Button>
+        <div className="right-top" style={{ display: "gird", gridTemplateRows: `repeat(${funRow}, 1fr)`, gridTemplateColumns: `repeat(${funCol}, 1fr)` }}>
+
+
         </div>
         <div className="right-mid">
           {/* 右边底部内容 */}
