@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import BlocklyComponent from "./blockly";
 import { javascriptGenerator, Order } from 'blockly/javascript';
 import * as Blockly from 'blockly';
 
-function WorkingSpace() {
+function WorkingSpace({ setCommand }) {
   const [workspaceXml, setWorkspaceXml] = useState("");
-
   const toolboxConfig = `
     <xml xmlns="https://developers.google.com/blockly/xml">
       <block type="controls_if"></block>
@@ -25,6 +24,7 @@ function WorkingSpace() {
         toolboxConfig={toolboxConfig}
         initialXml={workspaceXml}
         onWorkspaceChange={setWorkspaceXml}
+        setCommand={setCommand}
       />
       
     </div>

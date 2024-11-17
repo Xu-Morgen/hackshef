@@ -14,6 +14,8 @@ function App() {
 
   const [fun, setFun] = useState()
   const [displayFun, setDisplayFun] = useState({})
+
+  const [command, setCommand] = useState() 
   return (
     <div className="container">
       <div className="left" style={{ display: "gird", gridTemplateRows: `repeat(${row}, 1fr)`, gridTemplateColumns: `repeat(${col}, 1fr)` }}>
@@ -38,7 +40,13 @@ function App() {
           <Button type='primary'>Clear</Button>
 
         </div> */}
-        <WorkingSpace></WorkingSpace>
+
+        <WorkingSpace setCommand={setCommand}></WorkingSpace>
+        <div className="right-bottom">
+          <Button type='primary' onClick={() => { alert(command) }}>Start</Button>
+          <Button type='primary'>Clear</Button>
+
+        </div> 
       </div>
     </div>
   );
