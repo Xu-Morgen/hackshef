@@ -4,6 +4,7 @@ import { useState } from 'react';
 import DisplayBtn from './displayBtn/displayBtn';
 import MapLoader from "./levelSelection"
 import WorkingSpace from './workingSpace';
+import Gaming from './gaming';
 
 function App() {
   const [row, setRow] = useState(4)
@@ -16,7 +17,7 @@ function App() {
             {`Item ${index + 1}`}
           </div>
         ))} */}
-        <MapLoader levelNumber={0} />
+        <Gaming></Gaming>
       </div>
       <div className="right">
         <div className="right-top">
