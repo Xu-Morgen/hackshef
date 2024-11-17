@@ -3,6 +3,10 @@ import BlocklyComponent from "./blockly";
 import { javascriptGenerator, Order } from 'blockly/javascript';
 import * as Blockly from 'blockly';
 
+window.LoopTrap = 100;
+javascriptGenerator.INFINITE_LOOP_TRAP =
+  'if(--window.LoopTrap == 0) throw "Infinite loop.";\n';
+
 function WorkingSpace({ setCommand }) {
   const [workspaceXml, setWorkspaceXml] = useState("");
   const toolboxConfig = `
@@ -13,6 +17,7 @@ function WorkingSpace({ setCommand }) {
       <block type="math_arithmetic"></block>
       <block type="text"></block>
       <block type="text_print"></block>
+      <block type="controls_whileUntil"></block>
       <block type= "colorShape"></block>
     </xml>
   `;
@@ -35,6 +40,8 @@ export default WorkingSpace;
 
 const colorShape = {
   init: function () {
+    this.appendEndRowInput('123')
+      .appendField('colorShape');
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip('type the position the block will move to');

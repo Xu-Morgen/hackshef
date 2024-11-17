@@ -5,6 +5,7 @@ import DisplayBtn from './displayBtn/displayBtn';
 import MapLoader from "./levelSelection"
 import WorkingSpace from './workingSpace';
 import Gaming from './gaming';
+import useModal from 'antd/es/modal/useModal';
 
 function App() {
   const [row, setRow] = useState(4)
@@ -21,8 +22,10 @@ function App() {
   const handleStart = (code) => {
     try {
       eval(code);
+      window.LoopTrap = 100;
     } catch (e) {
       alert(e);
+      window.LoopTrap = 100;
     }
   }
 
