@@ -5,6 +5,7 @@ import DisplayBtn from './displayBtn/displayBtn';
 import MapLoader from "./levelSelection"
 import WorkingSpace from './workingSpace';
 import useModal from 'antd/es/modal/useModal';
+import { useNavigate } from 'react-router-dom';
 import MapRender from "./mapRender";
 
 function App() {
@@ -52,6 +53,14 @@ function App() {
     } catch (e) {
       alert(e);
       window.LoopTrap = 100;
+    }
+    if (!gridRef.map.includes("$white")) {
+      //jump to homepage
+      // const navigate = useNavigate();
+
+      // const handleNavigate = () => {
+      //   navigate('/home');
+      // };
     }
   }
 
