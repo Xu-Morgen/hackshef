@@ -1,7 +1,32 @@
 {
   "0": {
     "map": [
-      [null, { "type": "special", "name": "?" }, "$null", null, null, null, null]
+      [null, null, null]
+    ]
+  },
+  "1": {
+    "map": [
+      ["$null", null, "$null", null],
+      [null, null, null, null]
+    ]
+  },
+  "2": {
+    "map": [
+      ["$null", null, "$null", null, "$null", null, "$null", null, "$null", null],
+      [null, null, null, null, null, null, null, null, null, null]
+    ]
+  },
+  "3": {
+    "map": [
+      ["$null", null, "$null", null, null, null],
+      [null, {"name": 1}, null, {"name": 1}, {"name": 1}, {"name": 1}]
+    ]
+  },
+  "4": {
+    "map": [
+      ["$null", "$null", null],
+      ["$null", null, null],
+      [null, null, null]
     ]
   }
 }

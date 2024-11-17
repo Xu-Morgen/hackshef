@@ -21,7 +21,7 @@ function MapRender({ mapData, x, y }) {
         justifyContent: 'center',
         alignItems: 'center',
         height: '100vh', // 满屏高度
-        overflow: 'hidden',
+        overflow: 'visible',
       }}
     >
       <div
