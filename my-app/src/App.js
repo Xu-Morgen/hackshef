@@ -70,7 +70,7 @@ function App() {
       alert(e);
       window.LoopTrap = 100;
     }
-    if (!gridRef.map.includes("$white")) {
+    if (!gridRef.current.map.includes("$white")) {
       //jump to homepage
       // const navigate = useNavigate();
 
