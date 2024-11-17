@@ -83,11 +83,9 @@ function App() {
     }
     console.log(gridRef.current.map)
     if (!gridRef.current.map.includes(null)) { //获胜
-      // const navigate = useNavigate();
-
-      // useEffect(() => {
-      //   navigate("/home/i"); // 跳转到 React 应用内部的页面
-      // }, [navigate]);
+      const userConfirmed = window.alert("You win!");
+      sleep(2);
+      window.location.href = "/"+i+1;
     }
     else {//失败
       alert("seems like something to be wrong")
@@ -121,6 +119,7 @@ function App() {
         <div className="right-bottom">
           <Button size='large' type='primary' onClick={() => { checkReset() }}>Start</Button>
           <Button size='large' type='primary' onClick={() => { resetRef.current(0); setHasReset(true) }}>Reset</Button>
+
           <Popconfirm
             title="Delete the blocks"
             description="Are you sure to claer the workspce?"
