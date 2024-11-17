@@ -7,7 +7,7 @@ window.LoopTrap = 100;
 javascriptGenerator.INFINITE_LOOP_TRAP =
   'if(--window.LoopTrap == 0) throw "Infinite loop.";\n';
 
-function WorkingSpace({ setCommand }) {
+function WorkingSpace({ setCommand, workspaceRef, command }) {
   const [workspaceXml, setWorkspaceXml] = useState("");
   const toolboxConfig = `
     <xml xmlns="https://developers.google.com/blockly/xml">
@@ -26,10 +26,12 @@ function WorkingSpace({ setCommand }) {
     <div>
       <h1>React Blockly Demo</h1>
       <BlocklyComponent
+        workspaceRef={workspaceRef}
         toolboxConfig={toolboxConfig}
         initialXml={workspaceXml}
         onWorkspaceChange={setWorkspaceXml}
         setCommand={setCommand}
+        command={command}
       />
       
     </div>

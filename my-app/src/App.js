@@ -1,6 +1,6 @@
 import './App.css';
 import { Row, Col, Button } from 'antd';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import DisplayBtn from './displayBtn/displayBtn';
 import MapLoader from "./levelSelection"
 import WorkingSpace from './workingSpace';
@@ -12,6 +12,9 @@ function App() {
   const [col, setCol] = useState(3)
   const [funRow, SetFunRow] = useState(3)
   const [funCol, SetFunCol] = useState(3)
+
+  const workspaceRef = useRef(null); // Blockly 工作区实例
+
 
   const [fun, setFun] = useState()
   const [displayFun, setDisplayFun] = useState({})
@@ -29,16 +32,23 @@ function App() {
     }
   }
 
+  const handleClear = () => {
+    if (workspaceRef.current) {
+      workspaceRef.current.clear(); // 清空工作区中的所有块
+      setCommand(""); // 清空命令
+    }
+  } 
+
   return (
     <div className="container">
       <div className="left" style={{ display: "gird", gridTemplateRows: `repeat(${row}, 1fr)`, gridTemplateColumns: `repeat(${col}, 1fr)` }}>
         <Gaming></Gaming>
       </div>
       <div className="right">
-        <WorkingSpace setCommand={setCommand}></WorkingSpace>
+        <WorkingSpace setCommand={setCommand} workspaceRef={workspaceRef} command={command}></WorkingSpace>
         <div className="right-bottom">
           <Button type='primary' onClick={() => { handleStart(command) }}>Start</Button>
-          <Button type='primary'>Clear</Button>
+          <Button type='primary' onClick={() => { handleClear() }}>Clear</Button>
           <Button type='primary'>Reset</Button>
 
         </div> 
