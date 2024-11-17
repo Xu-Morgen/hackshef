@@ -7,6 +7,8 @@ window.LoopTrap = 100;
 javascriptGenerator.INFINITE_LOOP_TRAP =
   'if(--window.LoopTrap == 0) throw "Infinite loop.";\n';
 
+const ILIKESLEEP = "sleep(5000);\n"
+
 function WorkingSpace({ setCommand, workspaceRef, command }) {
   const [workspaceXml, setWorkspaceXml] = useState("");
   const toolboxConfig = `
@@ -24,6 +26,8 @@ function WorkingSpace({ setCommand, workspaceRef, command }) {
       <block type= "left"></block>
       <block type= 'right'></block>
       <block type= 'shapeT'></block>
+      <block type= 'shapeL'></block>
+      <block type= 'MoveTo'></block>
     </xml>
   `;
 
@@ -61,8 +65,8 @@ const colorShape = {
 Blockly.common.defineBlocks({ colorShape: colorShape });
 
 javascriptGenerator.forBlock['colorShape'] = function (block, generator) {
-  const code = `triggerColorShape();`;
-  return code;
+  const code = `triggerColorShape();\n`;
+  return ILIKESLEEP + code;
 }
 
 const up = {
@@ -78,8 +82,8 @@ const up = {
 };
 Blockly.common.defineBlocks({ up: up });
 javascriptGenerator.forBlock['up'] = function (block, generator) {
-  const code = `triggerMove("up");`;
-  return code;
+  const code = `triggerMove("up");\n`;
+  return ILIKESLEEP + code;
 }
 
 const down = {
@@ -95,8 +99,8 @@ const down = {
 };
 Blockly.common.defineBlocks({ down: down });
 javascriptGenerator.forBlock['down'] = function (block, generator) {
-  const code = `triggerMove("down");`;
-  return code;
+  const code = `triggerMove("down");\n`;
+  return ILIKESLEEP + code;
 }
 
 const left = {
@@ -112,8 +116,8 @@ const left = {
 };
 Blockly.common.defineBlocks({ left: left });
 javascriptGenerator.forBlock['left'] = function (block, generator) {
-  const code = `triggerMove("left");`;
-  return code;
+  const code = `triggerMove("left");\n`;
+  return ILIKESLEEP + code;
 }
 
 const right = {
@@ -129,8 +133,8 @@ const right = {
 };
 Blockly.common.defineBlocks({ right: right });
 javascriptGenerator.forBlock['right'] = function (block, generator) {
-  const code = `triggerMove("right");`;
-  return code;
+  const code = `triggerMove("right");\n`;
+  return ILIKESLEEP + code;
 }
 
 const shapeT = {
@@ -146,8 +150,8 @@ const shapeT = {
 };
 Blockly.common.defineBlocks({ shapeT: shapeT });
 javascriptGenerator.forBlock['shapeT'] = function (block, generator) {
-  const code = ` triggerSelectShape('T');`;
-  return code;
+  const code = ` triggerSelectShape('T');\n`;
+  return ILIKESLEEP + code;
 }
 
 const shapeL = {
@@ -163,6 +167,37 @@ const shapeL = {
 };
 Blockly.common.defineBlocks({ shapeL: shapeL });
 javascriptGenerator.forBlock['shapeL'] = function (block, generator) {
-  const code = ` triggerSelectShape('L');`;
-  return code;
+  const code = ` triggerSelectShape('L');\n`;
+  return ILIKESLEEP + code;
+}
+
+const MoveTo = {
+  init: function () {
+    this.appendEndRowInput('')
+      .appendField('MoveTo');
+    this.appendValueInput('PositionX')
+      .setCheck('Number')
+      .appendField('PositonX');
+    this.appendValueInput('PositionY')
+      .setCheck('Number')
+      .appendField('PositonY');
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip('type the position the block will move to');
+    this.setHelpUrl('');
+    this.setColour(225);
+  }
+};
+
+Blockly.common.defineBlocks({ MoveTo: MoveTo });
+javascriptGenerator.forBlock['MoveTo'] = function (block, generator) {
+  // TODO: change Order.ATOMIC to the correct operator precedence strength
+  const PositionX = generator.valueToCode(block, 'PositionX', Order.ATOMIC);
+
+  // TODO: change Order.ATOMIC to the correct operator precedence strength
+  const PositionY = generator.valueToCode(block, 'PositionY', Order.ATOMIC);
+
+  // TODO: Assemble javascript into the code variable.
+  const code = `triggerMoveTo(${PositionX},${PositionY});\n`;
+  return ILIKESLEEP + code;
 }
