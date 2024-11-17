@@ -1,5 +1,5 @@
 import './App.css';
-import { Row, Col, Button, Popconfirm } from 'antd';
+import { Row, Col, Button, Popconfirm, Image } from 'antd';
 import { useState, useRef, useEffect } from 'react';
 import DisplayBtn from './displayBtn/displayBtn';
 import MapLoader from "./levelSelection"
@@ -9,7 +9,9 @@ import { useNavigate } from 'react-router-dom';
 import MapRender from "./mapRender";
 import { useParams } from 'react-router-dom';
 import * as _ from 'lodash'
-import cubesData from './cubes.json'; 
+import cubesData from './cubes.json';
+import Image1 from './image/01.png'
+import Image2 from './image/02.png'
 
 function App() {
   const { id } = useParams();
@@ -82,16 +84,16 @@ function App() {
       window.LoopTrap = 100;
     }
     console.log(gridRef.current.map)
-    if (!gridRef.current.map.all("$filled")) { //获胜
-      // const navigate = useNavigate();
+    // if (!gridRef.current.map.all("$filled")) { //获胜
+    //   // const navigate = useNavigate();
 
-      // useEffect(() => {
-      //   navigate("/home/i"); // 跳转到 React 应用内部的页面
-      // }, [navigate]);
-    }
-    else {//失败
-      alert("seems like something to be wrong")
-    }
+    //   // useEffect(() => {
+    //   //   navigate("/home/i"); // 跳转到 React 应用内部的页面
+    //   // }, [navigate]);
+    // }
+    // else {//失败
+    //   alert("seems like something to be wrong")
+    // }
   }
 
 
@@ -110,6 +112,15 @@ function App() {
     else { alert("you should reset the map before start a new game") }
   }
 
+  const showImage = (id) => {
+    if (id == 0) {
+      return (<>1:<img src={Image1} />2:<img src={Image2} /></>)
+    }
+    if (id == 1 || id == 2 || id == 3 || id == 4) {
+      return (<>1:<img src={Image1} />2:<img src={Image1} /></>)
+    }
+  }
+
   return (
     <div className="container">
       <div className="left">
@@ -120,7 +131,7 @@ function App() {
         <WorkingSpace setCommand={setCommand} workspaceRef={workspaceRef} command={command}></WorkingSpace>
         <div className="right-bottom">
           <Button size='large' type='primary' onClick={() => { checkReset() }}>Start</Button>
-          <Button size='large' type='primary' onClick={() => { resetRef.current(0); setHasReset(true) }}>Reset</Button>
+          <Button size='large' type='primary' onClick={() => { resetRef.current(id); setHasReset(true) }}>Reset</Button>
           <Popconfirm
             title="Delete the blocks"
             description="Are you sure to claer the workspce?"
@@ -130,7 +141,10 @@ function App() {
             cancelText="No"
           >
             <Button size='large' type="primary" danger>Clear</Button>
+
+
           </Popconfirm>
+          {showImage(id)}
 
         </div> 
       </div>
