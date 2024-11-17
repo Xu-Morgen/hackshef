@@ -3,7 +3,11 @@ import { Row, Col, Button } from 'antd';
 import { useState } from 'react';
 import DisplayBtn from './displayBtn/displayBtn';
 import MapLoader from "./levelSelection"
+<<<<<<< HEAD
 import { List, use } from 'echarts';
+=======
+import WorkingSpace from './workingSpace';
+>>>>>>> fe5eaf4241a5d6dbf780803eaedf620b9ea49c23
 
 function App() {
   const [row, setRow] = useState(4)
@@ -33,9 +37,11 @@ function App() {
           右边底部
         </div>
         <div className="right-bottom">
-          <Button type='primary'>Start</Button>
-          <Button type='primary'>Clear</Button>
+          {/* <Button type='primary'>Start</Button>
+          <Button type='primary'>Clear</Button> */}
+          
         </div>
+        <WorkingSpace></WorkingSpace>
       </div>
     </div>
   );
