@@ -6,15 +6,15 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import CardSlider from './home';
+import Home from './home';
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/:id",
     element: <App></App>,
   },
   {
-    path: "/home",
-    element: <CardSlider></CardSlider>,
+    path: "/home/:id",
+    element: <Home></Home>,
   },
 ]);
 ReactDOM.createRoot(document.getElementById("root")).render(

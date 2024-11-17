@@ -7,10 +7,13 @@ import WorkingSpace from './workingSpace';
 import useModal from 'antd/es/modal/useModal';
 import { useNavigate } from 'react-router-dom';
 import MapRender from "./mapRender";
+import { useParams } from 'react-router-dom';
 import * as _ from 'lodash'
+import cubesData from './cubes.json'; 
 
 function App() {
-
+  const { id } = useParams();
+  const i = id;
   function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
@@ -86,7 +89,7 @@ function App() {
       // };
     }
     else {
-      resetRef.current(0)
+      resetRef.current(i)
       alert("seems like something go wrong")
     }
   }
@@ -103,14 +106,14 @@ function App() {
     <div className="container">
       <div className="left" style={{ display: "gird", gridTemplateRows: `repeat(${row}, 1fr)`, gridTemplateColumns: `repeat(${col}, 1fr)` }}>
         <Gaming colorShapeRef={colorShapeRef} moveRef={moveRef} positionRef={positionRef} gridRef={gridRef} changeShapeRef={changeShapeRef}
-          selectedShapeRef={selectedShapeRef} startAtRef={startAtRef} resetRef={resetRef} checkRef={checkRef}></Gaming>
+          selectedShapeRef={selectedShapeRef} startAtRef={startAtRef} resetRef={resetRef} checkRef={checkRef} i={i}></Gaming>
       </div>
       <div className="right">
         <WorkingSpace setCommand={setCommand} workspaceRef={workspaceRef} command={command}></WorkingSpace>
         <div className="right-bottom">
           <Button type='primary' onClick={() => { handleStart(command) }}>Start</Button>
           <Button type='primary' onClick={() => { handleClear() }}>Clear</Button>
-          <Button type='primary' onClick={() => { resetRef.current(0) }}>Reset</Button>
+          <Button type='primary' onClick={() => { resetRef.current(i) }}>Reset</Button>
 
         </div> 
       </div>
@@ -123,25 +126,17 @@ export default App;
 
 
 
-const createGrid = () => {
-  return MapLoader(0);
+const createGrid = (i) => {
+  return MapLoader(i);
 };
 
-// 形状定义（例如L形状，T形状）
-const customShapes = {
-  "L": [
-    [0, 0], [0, 1], [1, 1], [2, 1]  // L形状
-  ],
-  "T": [
-    [0, 0], [0, 1], [0, 2], [1, 1]  // T形状
-  ],
-  // 你可以在这里继续添加更多自定义形状
-};
 
-function Gaming({ colorShapeRef, moveRef, positionRef, gridRef, changeShapeRef, selectedShapeRef, startAtRef, resetRef, checkRef }) {
-  const [grid, setGrid] = useState(createGrid());
+
+function Gaming({ colorShapeRef, moveRef, positionRef, gridRef, changeShapeRef, selectedShapeRef, startAtRef, resetRef, checkRef, i }) {
+  const customShapes = cubesData[i];
+  const [grid, setGrid] = useState(createGrid(i));
   const [currentPosition, setCurrentPosition] = useState({ row: 0, col: 0 });
-  const [selectedShape, setSelectedShape] = useState("L"); // 当前选择的自定义形状
+  const [selectedShape, setSelectedShape] = useState("0"); // 当前选择的自定义形状
   var SIZEX = grid.map.length;
   var SIZEY = grid.map[0].length;
   const [positionChange, setPositionChange] = useState(0)
@@ -261,8 +256,8 @@ function Gaming({ colorShapeRef, moveRef, positionRef, gridRef, changeShapeRef, 
         <button onClick={() => move("left")}>左</button>
         <button onClick={() => move("right")}>右</button>
         <br />
-        <button onClick={() => selectShape("L")}>选择L形状</button>
-        <button onClick={() => selectShape("T")}>选择T形状</button>
+        <button onClick={() => selectShape("0")}>选择L形状</button>
+        <button onClick={() => selectShape("1")}>选择T形状</button>
         <br />
         <button onClick={colorShape}>涂色</button>
       </div>
