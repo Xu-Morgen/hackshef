@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { a } from '@react-spring/web';
 import { useSpring } from '@react-spring/core';
 import { useNavigate } from 'react-router-dom'; // 用于导航
+import { useParams } from 'react-router-dom';
 import styles from './styles.module.css';
 
-export default function Home(i) {
+export default function Home() {
+  const { id } = useParams();
   const [flipped, setFlipped] = useState(false);
   const [fly, setFly] = useState(false);
   const navigate = useNavigate();
@@ -24,8 +26,10 @@ export default function Home(i) {
 
   // 点击后跳转页面
   const handleClick = () => {
-    navigate('/i'); // 跳转到新页面
+    navigate('/'+ id); // 跳转到新页面
   };
+
+  const text = [];
 
   return (
     <div className={styles.container} onClick={handleClick}>
@@ -33,7 +37,7 @@ export default function Home(i) {
         className={`${styles.c} ${styles.back}`}
         style={{ opacity: opacity.to(o => 1 - o), transform }}
       >
-        1
+        {id}
       </a.div>
       <a.div
         className={`${styles.c} ${styles.front}`}
@@ -43,7 +47,7 @@ export default function Home(i) {
           rotateX: '180deg',
         }}
       >
-        2
+        {text[id]}
       </a.div>
     </div>
   );

@@ -7,10 +7,13 @@ import WorkingSpace from './workingSpace';
 import useModal from 'antd/es/modal/useModal';
 import { useNavigate } from 'react-router-dom';
 import MapRender from "./mapRender";
+import { useParams } from 'react-router-dom';
 import * as _ from 'lodash'
+import cubesData from './cubes.json'; 
 
 function App() {
-
+  const { id } = useParams();
+  const i = id;
   function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
@@ -112,7 +115,7 @@ function App() {
     <div className="container">
       <div className="left">
         <Gaming colorShapeRef={colorShapeRef} moveRef={moveRef} positionRef={positionRef} gridRef={gridRef} changeShapeRef={changeShapeRef}
-          selectedShapeRef={selectedShapeRef} startAtRef={startAtRef} resetRef={resetRef} checkRef={checkRef}></Gaming>
+          selectedShapeRef={selectedShapeRef} startAtRef={startAtRef} resetRef={resetRef} checkRef={checkRef} i={i}></Gaming>
       </div>
       <div className="right">
         <WorkingSpace setCommand={setCommand} workspaceRef={workspaceRef} command={command}></WorkingSpace>
@@ -142,25 +145,17 @@ export default App;
 
 
 
-const createGrid = () => {
-  return MapLoader(0);
+const createGrid = (i) => {
+  return MapLoader(i);
 };
 
-// 形状定义（例如L形状，T形状）
-const customShapes = {
-  "L": [
-    [0, 0], [0, 1], [1, 1], [2, 1]  // L形状
-  ],
-  "T": [
-    [0, 0], [0, 1], [0, 2], [1, 1]  // T形状
-  ],
-  // 你可以在这里继续添加更多自定义形状
-};
 
-function Gaming({ colorShapeRef, moveRef, positionRef, gridRef, changeShapeRef, selectedShapeRef, startAtRef, resetRef, checkRef }) {
-  const [grid, setGrid] = useState(createGrid());
+
+function Gaming({ colorShapeRef, moveRef, positionRef, gridRef, changeShapeRef, selectedShapeRef, startAtRef, resetRef, checkRef, i }) {
+  const customShapes = cubesData[i];
+  const [grid, setGrid] = useState(createGrid(i));
   const [currentPosition, setCurrentPosition] = useState({ row: 0, col: 0 });
-  const [selectedShape, setSelectedShape] = useState("L"); // 当前选择的自定义形状
+  const [selectedShape, setSelectedShape] = useState("0"); // 当前选择的自定义形状
   var SIZEX = grid.map.length;
   var SIZEY = grid.map[0].length;
   const [positionChange, setPositionChange] = useState(0)
