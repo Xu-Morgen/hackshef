@@ -15,10 +15,17 @@ function App() {
 
   const workspaceRef = useRef(null); // Blockly 工作区实例
   const colorShapeRef = useRef(null); // 用于引用 Gaming 中的 colorShape 方法
+  const moveRef = useRef(null); // 用于引用 Gaming 中的 move 方法
 
   const triggerColorShape = () => {
     if (colorShapeRef.current) {
       colorShapeRef.current(); // 调用 Gaming 组件中的 colorShape 方法
+    }
+  };
+
+  const triggerMove = (direction) => {
+    if (moveRef.current) {
+      moveRef.current(direction); // 调用 Gaming 组件中的 colorShape 方法
     }
   };
 
@@ -38,6 +45,7 @@ function App() {
     }
   }
 
+
   const handleClear = () => {
     if (workspaceRef.current) {
       workspaceRef.current.clear(); // 清空工作区中的所有块
@@ -48,7 +56,7 @@ function App() {
   return (
     <div className="container">
       <div className="left" style={{ display: "gird", gridTemplateRows: `repeat(${row}, 1fr)`, gridTemplateColumns: `repeat(${col}, 1fr)` }}>
-        <Gaming colorShapeRef={colorShapeRef}></Gaming>
+        <Gaming colorShapeRef={colorShapeRef} moveRef={moveRef}></Gaming>
       </div>
       <div className="right">
         <WorkingSpace setCommand={setCommand} workspaceRef={workspaceRef} command={command}></WorkingSpace>
@@ -83,10 +91,11 @@ const customShapes = {
   // 你可以在这里继续添加更多自定义形状
 };
 
-function Gaming({ colorShapeRef }) {
+function Gaming({ colorShapeRef, moveRef }) {
   const [grid, setGrid] = useState(createGrid());
   const [currentPosition, setCurrentPosition] = useState({ row: 0, col: 0 });
   const [selectedShape, setSelectedShape] = useState("L"); // 当前选择的自定义形状
+  var updatePosition = { col: 0, row: 0 }
   const SIZEX = grid.map.length;
   const SIZEY = grid.map[0].length;
   // 移动当前位置的函数
@@ -99,12 +108,15 @@ function Gaming({ colorShapeRef }) {
     setCurrentPosition({ row, col });
   };
 
-
   useEffect(() => {
     if (colorShapeRef) {
       colorShapeRef.current = colorShape; // 将 colorShape 函数暴露出去
     }
-  }, []);
+    if (moveRef) {
+      moveRef.current = move;// 将 move 函数暴露出去
+    }
+  }, [currentPosition]);
+
   // 选择自定义形状
   const selectShape = (shape) => {
     setSelectedShape(shape);
