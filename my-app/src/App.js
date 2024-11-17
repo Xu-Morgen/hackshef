@@ -25,19 +25,19 @@ function App() {
         <MapLoader levelNumber={0} />
       </div>
       <div className="right">
-        <div className="right-top" style={{ display: "gird", gridTemplateRows: `repeat(${funRow}, 1fr)`, gridTemplateColumns: `repeat(${funCol}, 1fr)` }}>
+        {/* <div className="right-top" style={{ display: "gird", gridTemplateRows: `repeat(${funRow}, 1fr)`, gridTemplateColumns: `repeat(${funCol}, 1fr)` }}>
 
 
         </div>
         <div className="right-mid">
-          {/* 右边底部内容 */}
+           右边底部内容
           右边底部
         </div>
         <div className="right-bottom">
-          {/* <Button type='primary'>Start</Button>
-          <Button type='primary'>Clear</Button> */}
-          
-        </div>
+          <Button type='primary'>Start</Button>
+          <Button type='primary'>Clear</Button>
+
+        </div> */}
         <WorkingSpace></WorkingSpace>
       </div>
     </div>
