@@ -19,6 +19,7 @@ function App() {
   const workspaceRef = useRef(null); // Blockly 工作区实例
   const colorShapeRef = useRef(null); // 用于引用 Gaming 中的 colorShape 方法
   const moveRef = useRef(null); // 用于引用 Gaming 中的 move 方法
+  const changeShapeRef = useRef(null);// 用于引用 Gaming 中的 move 方法
 
   const triggerColorShape = () => {
     if (colorShapeRef.current) {
@@ -31,6 +32,12 @@ function App() {
       moveRef.current(direction); // 调用 Gaming 组件中的 colorShape 方法
     }
   };
+
+  const triggerSelectShape = (shape) => {
+    if (changeShapeRef.current) {
+      changeShapeRef.current(shape)
+    }
+  }
 
   const [fun, setFun] = useState()
   const [displayFun, setDisplayFun] = useState({})
@@ -59,7 +66,7 @@ function App() {
   return (
     <div className="container">
       <div className="left" style={{ display: "gird", gridTemplateRows: `repeat(${row}, 1fr)`, gridTemplateColumns: `repeat(${col}, 1fr)` }}>
-        <Gaming colorShapeRef={colorShapeRef} moveRef={moveRef} positionRef={positionRef} gridRef={gridRef}></Gaming>
+        <Gaming colorShapeRef={colorShapeRef} moveRef={moveRef} positionRef={positionRef} gridRef={gridRef} changeShapeRef={changeShapeRef}></Gaming>
       </div>
       <div className="right">
         <WorkingSpace setCommand={setCommand} workspaceRef={workspaceRef} command={command}></WorkingSpace>
@@ -94,7 +101,7 @@ const customShapes = {
   // 你可以在这里继续添加更多自定义形状
 };
 
-function Gaming({ colorShapeRef, moveRef, positionRef, gridRef }) {
+function Gaming({ colorShapeRef, moveRef, positionRef, gridRef, changeShapeRef }) {
   const [grid, setGrid] = useState(createGrid());
   const [currentPosition, setCurrentPosition] = useState({ row: 0, col: 0 });
   const [selectedShape, setSelectedShape] = useState("L"); // 当前选择的自定义形状
@@ -131,6 +138,9 @@ function Gaming({ colorShapeRef, moveRef, positionRef, gridRef }) {
     }
     if (moveRef) {
       moveRef.current = move;// 将 move 函数暴露出去
+    }
+    if (changeShapeRef) {
+      changeShapeRef.current = selectShape;
     }
   }, [currentPosition]);
 
