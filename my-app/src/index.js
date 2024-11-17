@@ -7,6 +7,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Home from './home';
+import HelloPage from './title';
 const router = createBrowserRouter([
   {
     path: "/:id",
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
     path: "/home/:id",
     element: <Home></Home>,
   },
+  {
+    path: "/hello",
+    element: <HelloPage />
+  }
 ]);
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
