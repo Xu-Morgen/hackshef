@@ -122,6 +122,12 @@ function Gaming({ colorShapeRef, moveRef, positionRef, gridRef, changeShapeRef }
     console.log(positionRef.current)
   };
 
+  const check = () => {
+    return grid.map[currentPosition.row][currentPosition.col].name;
+  };
+  const startAt = (x, y) => {
+    setCurrentPosition(x, y);
+  }
   useEffect(() => {
     gridRef.current = grid;
   }, [])
