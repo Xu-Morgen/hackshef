@@ -82,7 +82,7 @@ function App() {
       window.LoopTrap = 100;
     }
     console.log(gridRef.current.map)
-    if (!gridRef.current.map.all("$filled")) { //获胜
+    if (!gridRef.current.map.includes(null)) { //获胜
       // const navigate = useNavigate();
 
       // useEffect(() => {
