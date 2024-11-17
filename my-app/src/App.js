@@ -13,6 +13,9 @@ function App() {
   const [funRow, SetFunRow] = useState(3)
   const [funCol, SetFunCol] = useState(3)
 
+  const positionRef = useRef({ row: 0, col: 0 });//用于记录当前位置
+  const gridRef = useRef({});
+
   const workspaceRef = useRef(null); // Blockly 工作区实例
   const colorShapeRef = useRef(null); // 用于引用 Gaming 中的 colorShape 方法
   const moveRef = useRef(null); // 用于引用 Gaming 中的 move 方法
@@ -56,7 +59,7 @@ function App() {
   return (
     <div className="container">
       <div className="left" style={{ display: "gird", gridTemplateRows: `repeat(${row}, 1fr)`, gridTemplateColumns: `repeat(${col}, 1fr)` }}>
-        <Gaming colorShapeRef={colorShapeRef} moveRef={moveRef}></Gaming>
+        <Gaming colorShapeRef={colorShapeRef} moveRef={moveRef} positionRef={positionRef} gridRef={gridRef}></Gaming>
       </div>
       <div className="right">
         <WorkingSpace setCommand={setCommand} workspaceRef={workspaceRef} command={command}></WorkingSpace>
@@ -91,22 +94,36 @@ const customShapes = {
   // 你可以在这里继续添加更多自定义形状
 };
 
-function Gaming({ colorShapeRef, moveRef }) {
+function Gaming({ colorShapeRef, moveRef, positionRef, gridRef }) {
   const [grid, setGrid] = useState(createGrid());
   const [currentPosition, setCurrentPosition] = useState({ row: 0, col: 0 });
   const [selectedShape, setSelectedShape] = useState("L"); // 当前选择的自定义形状
-  var updatePosition = { col: 0, row: 0 }
   const SIZEX = grid.map.length;
   const SIZEY = grid.map[0].length;
+  const [positionChange, setPositionChange] = useState(0)
   // 移动当前位置的函数
   const move = (direction) => {
-    let { row, col } = currentPosition;
+    let random = Math.random() * 100
+    let { row, col } = positionRef.current;
     if (direction === "up" && row > 0) row--;
     if (direction === "down" && row < SIZEX - 1) row++;
     if (direction === "left" && col > 0) col--;
     if (direction === "right" && col < SIZEY - 1) col++;
-    setCurrentPosition({ row, col });
+    positionRef.current.row = row;
+    positionRef.current.col = col
+    setPositionChange(random)
+    console.log(positionRef.current)
   };
+
+  useEffect(() => {
+    gridRef.current = grid;
+  }, [])
+
+  useEffect(() => {
+    setCurrentPosition(positionRef.current)
+    setGrid(gridRef.current)
+    console.log('change')
+  }, [positionChange])
 
   useEffect(() => {
     if (colorShapeRef) {
@@ -124,10 +141,12 @@ function Gaming({ colorShapeRef, moveRef }) {
 
   // 涂色功能：根据当前选择的自定义形状涂色
   const colorShape = () => {
-    const { row, col } = currentPosition;
-    const shape = customShapes[selectedShape];
-    const newGrid = JSON.parse(JSON.stringify(grid)); // 克隆当前的地图
+    let random = Math.random() * 100
 
+    const { row, col } = positionRef.current;
+    const shape = customShapes[selectedShape];
+    const newGrid = JSON.parse(JSON.stringify(gridRef.current)); // 克隆当前的地图
+    console.log(row, col, "colorshape")
     // 检查形状是否越界
     for (let i = 0; i < shape.length; i++) {
       const [r, c] = shape[i];
@@ -139,12 +158,14 @@ function Gaming({ colorShapeRef, moveRef }) {
       newGrid.map[newRow][newCol] = "$filled"; // 在新的位置涂色
     }
 
-    setGrid(newGrid); // 更新地图
+    gridRef.current = (newGrid); // 更新地图
+    setPositionChange(random)
+
   };
 
   // 渲染地图
   const renderGrid = () => {
-    return <MapRender mapData={grid} x={currentPosition.row} y={currentPosition.col} />
+    return <MapRender mapData={grid} x={positionRef.current.row} y={positionRef.current.col} />
   };
 
   return (
