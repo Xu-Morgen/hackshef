@@ -1,6 +1,7 @@
 import './App.css';
 import { Row, Col, Button } from 'antd';
 import { useState } from 'react';
+import DisplayBtn from './displayBtn/displayBtn';
 import MapLoader from "./levelSelection"
 import WorkingSpace from './workingSpace';
 
@@ -19,7 +20,7 @@ function App() {
       </div>
       <div className="right">
         <div className="right-top">
-          <Button type='primary'>Fun1</Button>
+          <DisplayBtn />
           <Button type='primary'>Fun1</Button>
           <Button type='primary'>Fun1</Button>
           <Button type='primary'>Fun1</Button>

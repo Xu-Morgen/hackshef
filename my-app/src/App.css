@@ -25,9 +25,16 @@ html, body {
 }
 
 .right-top{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
   height: 20%;
   background-color: lightgreen;
+  gap: 10px;
 }
+
 .right-mid{
   height: 60%;
   background-color: lightgreen; /* 背景色可以根据需求调整 */
