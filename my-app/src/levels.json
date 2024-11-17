@@ -1,16 +1,7 @@
 {
   "0": {
     "map": [
-      [null, { "type": "special", "name": "?" }, "$null", null, null, null, { "type": "special", "name": "?" }, null, null, null],
-      [null, null, null, null, null, "$null", null, null, null, null],
-      [{ "type": "special", "name": "?" }, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, "$filled", null, null, null, null, null],
-      [null, "$null", null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, { "type": "special", "name": "?" }, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, { "type": "special", "name": "!" }, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null]
+      [null, { "type": "special", "name": "?" }, "$null", null, null, null, null]
     ]
   }
 }

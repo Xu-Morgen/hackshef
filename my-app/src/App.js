@@ -82,13 +82,12 @@ function App() {
       window.LoopTrap = 100;
     }
     console.log(gridRef.current.map)
-    if (!gridRef.current.map.includes("$white")) { //获胜
-      //jump to homepage
+    if (!gridRef.current.map.all("$filled")) { //获胜
       // const navigate = useNavigate();
 
-      // const handleNavigate = () => {
-      //   navigate('/home');
-      // };
+      // useEffect(() => {
+      //   navigate("/home/i"); // 跳转到 React 应用内部的页面
+      // }, [navigate]);
     }
     else {//失败
       alert("seems like something to be wrong")

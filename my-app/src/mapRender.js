@@ -33,6 +33,7 @@ function MapRender({ mapData, x, y }) {
           position: 'relative',
           left: `${horizontalOffset}px`,
           top: `${verticalOffset}px`,
+          padding: 0,
         }}
       >
         {mapData.map.map((row, rowIndex) =>
