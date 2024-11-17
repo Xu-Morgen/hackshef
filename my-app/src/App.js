@@ -98,7 +98,13 @@ function Gaming({ colorShapeRef }) {
     if (direction === "right" && col < SIZEY - 1) col++;
     setCurrentPosition({ row, col });
   };
-
+  const startAt = (x, y) => {
+    setCurrentPosition({x, y});
+  }
+  const check = () => {
+    let { row, col } = currentPosition;
+    return grid.map[row][col].name == null ? null : grid.map[row][col].name;
+  }
 
   useEffect(() => {
     if (colorShapeRef) {
