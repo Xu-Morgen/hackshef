@@ -1,6 +1,8 @@
 import './App.css';
 import { Row, Col, Button } from 'antd';
 import { useState } from 'react';
+import DisplayBtn from './displayBtn/displayBtn';
+import MapLoader from "./levelSelection"
 import WorkingSpace from './workingSpace';
 import Gaming from './gaming';
 
