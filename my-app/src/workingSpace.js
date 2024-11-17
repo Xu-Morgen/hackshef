@@ -27,8 +27,8 @@ function WorkingSpace({ setCommand, workspaceRef, command }) {
       <block type= "down"></block>
       <block type= "left"></block>
       <block type= 'right'></block>
-      <block type= 'shapeT'></block>
-      <block type= 'shapeL'></block>
+      <block type= 'shape1'></block>
+      <block type= 'shape2'></block>
       <block type= 'MoveTo'></block>
       <block type= 'check'></block>
     </xml>
@@ -140,10 +140,10 @@ javascriptGenerator.forBlock['right'] = function (block, generator) {
   return ILIKESLEEP + code;
 }
 
-const shapeT = {
+const shape1 = {
   init: function () {
-    this.appendEndRowInput('shapeT')
-      .appendField('shapeT');
+    this.appendEndRowInput('shape1')
+      .appendField('shape1');
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip('change color shape to T');
@@ -151,16 +151,16 @@ const shapeT = {
     this.setColour(225);
   }
 };
-Blockly.common.defineBlocks({ shapeT: shapeT });
-javascriptGenerator.forBlock['shapeT'] = function (block, generator) {
+Blockly.common.defineBlocks({ shape1: shape1 });
+javascriptGenerator.forBlock['shape1'] = function (block, generator) {
   const code = ` triggerSelectShape('T');\n`;
   return ILIKESLEEP + code;
 }
 
-const shapeL = {
+const shape2 = {
   init: function () {
-    this.appendEndRowInput('shapeL')
-      .appendField('shapeL');
+    this.appendEndRowInput('shape2')
+      .appendField('shape2');
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip('change color shape to L');
@@ -168,8 +168,8 @@ const shapeL = {
     this.setColour(225);
   }
 };
-Blockly.common.defineBlocks({ shapeL: shapeL });
-javascriptGenerator.forBlock['shapeL'] = function (block, generator) {
+Blockly.common.defineBlocks({ shape2: shape2 });
+javascriptGenerator.forBlock['shape2'] = function (block, generator) {
   const code = ` triggerSelectShape('L');\n`;
   return ILIKESLEEP + code;
 }

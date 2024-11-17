@@ -49,7 +49,6 @@ function BlocklyComponent({ toolboxConfig, initialXml, onWorkspaceChange, setCom
   return (
     <div>
       <div ref={blocklyDiv} style={{ height: "500px", width: "100%" }} />
-      <div>{command}</div>
     </div>
   );
 };

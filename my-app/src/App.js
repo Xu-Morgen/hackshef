@@ -121,7 +121,6 @@ function App() {
         <div className="right-bottom">
           <Button size='large' type='primary' onClick={() => { checkReset() }}>Start</Button>
           <Button size='large' type='primary' onClick={() => { resetRef.current(0); setHasReset(true) }}>Reset</Button>
-
           <Popconfirm
             title="Delete the blocks"
             description="Are you sure to claer the workspce?"
