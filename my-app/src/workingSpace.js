@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import BlocklyComponent from "./blockly";
 import { javascriptGenerator, Order } from 'blockly/javascript';
 import * as Blockly from 'blockly';
+import './App.css';
+
 
 window.LoopTrap = 100;
 javascriptGenerator.INFINITE_LOOP_TRAP =
@@ -33,8 +35,8 @@ function WorkingSpace({ setCommand, workspaceRef, command }) {
   `;
 
   return (
-    <div>
-      <h1>React Blockly Demo</h1>
+    <div className="workspace">
+      <h1>WorkSpace</h1>
       <BlocklyComponent
         workspaceRef={workspaceRef}
         toolboxConfig={toolboxConfig}
@@ -209,7 +211,7 @@ const check = {
     this.appendDummyInput('check')
       .setAlign(Blockly.inputs.Align.RIGHT)
       .appendField('check');
-    this.setOutput(true, null);
+    this.setOutput(true, 'String');
     this.setTooltip('check the information of current block');
     this.setHelpUrl('');
     this.setColour(225);

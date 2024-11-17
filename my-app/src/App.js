@@ -1,5 +1,5 @@
 import './App.css';
-import { Row, Col, Button } from 'antd';
+import { Row, Col, Button, Popconfirm } from 'antd';
 import { useState, useRef, useEffect } from 'react';
 import DisplayBtn from './displayBtn/displayBtn';
 import MapLoader from "./levelSelection"
@@ -22,6 +22,8 @@ function App() {
   const [col, setCol] = useState(3)
   const [funRow, SetFunRow] = useState(3)
   const [funCol, SetFunCol] = useState(3)
+  const [hasReset, setHasReset] = useState(true);//用于记录是否reset过
+
 
   const positionRef = useRef({ row: 0, col: 0 });//用于记录当前位置
   const gridRef = useRef({});//用于记录当前地图数据
@@ -80,7 +82,7 @@ function App() {
       window.LoopTrap = 100;
     }
     console.log(gridRef.current.map)
-    if (!gridRef.current.map.includes("$white")) {
+    if (!gridRef.current.map.includes("$white")) { //获胜
       //jump to homepage
       // const navigate = useNavigate();
 
@@ -88,9 +90,8 @@ function App() {
       //   navigate('/home');
       // };
     }
-    else {
-      resetRef.current(i)
-      alert("seems like something go wrong")
+    else {//失败
+      alert("seems like something to be wrong")
     }
   }
 
@@ -102,18 +103,36 @@ function App() {
     }
   } 
 
+  const checkReset = () => {
+    if (hasReset) {
+      handleStart(command);
+      setHasReset(false)
+    }
+    else { alert("you should reset the map before start a new game") }
+  }
+
   return (
     <div className="container">
-      <div className="left" style={{ display: "gird", gridTemplateRows: `repeat(${row}, 1fr)`, gridTemplateColumns: `repeat(${col}, 1fr)` }}>
+      <div className="left">
         <Gaming colorShapeRef={colorShapeRef} moveRef={moveRef} positionRef={positionRef} gridRef={gridRef} changeShapeRef={changeShapeRef}
           selectedShapeRef={selectedShapeRef} startAtRef={startAtRef} resetRef={resetRef} checkRef={checkRef} i={i}></Gaming>
       </div>
       <div className="right">
         <WorkingSpace setCommand={setCommand} workspaceRef={workspaceRef} command={command}></WorkingSpace>
         <div className="right-bottom">
-          <Button type='primary' onClick={() => { handleStart(command) }}>Start</Button>
-          <Button type='primary' onClick={() => { handleClear() }}>Clear</Button>
-          <Button type='primary' onClick={() => { resetRef.current(i) }}>Reset</Button>
+          <Button size='large' type='primary' onClick={() => { checkReset() }}>Start</Button>
+          <Button size='large' type='primary' onClick={() => { resetRef.current(0); setHasReset(true) }}>Reset</Button>
+
+          <Popconfirm
+            title="Delete the blocks"
+            description="Are you sure to claer the workspce?"
+            onConfirm={handleClear}
+            onCancel={() => { }}
+            okText="Yes"
+            cancelText="No"
+          >
+            <Button size='large' type="primary" danger>Clear</Button>
+          </Popconfirm>
 
         </div> 
       </div>
@@ -248,21 +267,7 @@ function Gaming({ colorShapeRef, moveRef, positionRef, gridRef, changeShapeRef, 
   };
 
   return (
-    <div className="App">
-      <h1>填色游戏</h1>
-      <div className="controls">
-        <button onClick={() => move("up")}>上</button>
-        <button onClick={() => move("down")}>下</button>
-        <button onClick={() => move("left")}>左</button>
-        <button onClick={() => move("right")}>右</button>
-        <br />
-        <button onClick={() => selectShape("0")}>选择L形状</button>
-        <button onClick={() => selectShape("1")}>选择T形状</button>
-        <br />
-        <button onClick={colorShape}>涂色</button>
-      </div>
-      <div className="grid">{renderGrid()}</div>
-    </div>
+    <div className="grid">{renderGrid()}</div>
   );
 }
 
