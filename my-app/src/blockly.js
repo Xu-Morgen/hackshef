@@ -8,7 +8,7 @@ function BlocklyComponent({ toolboxConfig, initialXml, onWorkspaceChange, setCom
   const blocklyDiv = useRef(null); // Blockly 工作区的 DOM 容器
   const workspaceRef = useRef(null); // Blockly 工作区实例
   const [code, setCode] = useState(""); // 用来存储生成的 JavaScript 代码
-  
+
   useEffect(() => {
     // 初始化工作区
     workspaceRef.current = Blockly.inject(blocklyDiv.current, {
@@ -42,7 +42,7 @@ function BlocklyComponent({ toolboxConfig, initialXml, onWorkspaceChange, setCom
       //   onWorkspaceChange(Blockly.Xml.domToText(xml));
       // }
     });
-    
+
     return () => {
       // 销毁工作区实例
       workspace.dispose();

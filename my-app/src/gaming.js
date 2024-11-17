@@ -19,7 +19,7 @@ const customShapes = {
   // 你可以在这里继续添加更多自定义形状
 };
 
-function Gaming() {
+function Gaming({ }) {
   const [grid, setGrid] = useState(createGrid());
   const [currentPosition, setCurrentPosition] = useState({ row: 0, col: 0 });
   const [selectedShape, setSelectedShape] = useState("L"); // 当前选择的自定义形状

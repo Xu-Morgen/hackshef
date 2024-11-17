@@ -1,9 +1,6 @@
 import './App.css';
 import { Row, Col, Button } from 'antd';
 import { useState } from 'react';
-import DisplayBtn from './displayBtn/displayBtn';
-import MapLoader from "./levelSelection"
-import { List, use } from 'echarts';
 import WorkingSpace from './workingSpace';
 import Gaming from './gaming';
 
@@ -15,37 +12,29 @@ function App() {
 
   const [fun, setFun] = useState()
   const [displayFun, setDisplayFun] = useState({})
-
+  //记录命令的内容
   const [command, setCommand] = useState() 
+
+
+  const handleStart = (code) => {
+    try {
+      eval(code);
+    } catch (e) {
+      alert(e);
+    }
+  }
+
   return (
     <div className="container">
       <div className="left" style={{ display: "gird", gridTemplateRows: `repeat(${row}, 1fr)`, gridTemplateColumns: `repeat(${col}, 1fr)` }}>
-        {/* {[...Array(row * col)].map((_, index) => (
-          <div key={index} className="grid-item">
-            {`Item ${index + 1}`}
-          </div>
-        ))} */}
         <Gaming></Gaming>
       </div>
       <div className="right">
-        {/* <div className="right-top" style={{ display: "gird", gridTemplateRows: `repeat(${funRow}, 1fr)`, gridTemplateColumns: `repeat(${funCol}, 1fr)` }}>
-
-
-        </div>
-        <div className="right-mid">
-           右边底部内容
-          右边底部
-        </div>
-        <div className="right-bottom">
-          <Button type='primary'>Start</Button>
-          <Button type='primary'>Clear</Button>
-
-        </div> */}
-
         <WorkingSpace setCommand={setCommand}></WorkingSpace>
         <div className="right-bottom">
-          <Button type='primary' onClick={() => { alert(command) }}>Start</Button>
+          <Button type='primary' onClick={() => { handleStart(command) }}>Start</Button>
           <Button type='primary'>Clear</Button>
+          <Button type='primary'>Reset</Button>
 
         </div> 
       </div>
