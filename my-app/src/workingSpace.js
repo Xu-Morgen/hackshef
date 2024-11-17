@@ -19,6 +19,8 @@ function WorkingSpace({ setCommand, workspaceRef, command }) {
       <block type="text_print"></block>
       <block type="controls_whileUntil"></block>
       <block type= "colorShape"></block>
+      <block type= "up"></block>
+      <block type= "down"></block>
     </xml>
   `;
 
@@ -40,13 +42,14 @@ function WorkingSpace({ setCommand, workspaceRef, command }) {
 
 export default WorkingSpace;
 
+
 const colorShape = {
   init: function () {
-    this.appendEndRowInput('123')
+    this.appendEndRowInput('colorShpae')
       .appendField('colorShape');
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setTooltip('type the position the block will move to');
+    this.setTooltip('Will color the color block with the current coordinates as the origin');
     this.setHelpUrl('');
     this.setColour(225);
   }
@@ -55,14 +58,44 @@ const colorShape = {
 Blockly.common.defineBlocks({ colorShape: colorShape });
 
 javascriptGenerator.forBlock['colorShape'] = function (block, generator) {
-  // TODO: change Order.ATOMIC to the correct operator precedence strength
-  // const value_position_X = generator.valueToCode(block, 'positionX', Order.ATOMIC);
-  // const value_position_Y = generator.valueToCode(block, 'positionY', Order.ATOMIC);
-  // function MoveTo(x, y) {
-  //   return x, y
-  // }
-  // TODO: Assemble javascript into the code variable.
   const code = `triggerColorShape();`;
+  return code;
+}
 
+const up = {
+  init: function () {
+    this.appendEndRowInput('up')
+      .appendField('up');
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip('going to move up');
+    this.setHelpUrl('');
+    this.setColour(225);
+  }
+};
+
+Blockly.common.defineBlocks({ up: up });
+
+javascriptGenerator.forBlock['up'] = function (block, generator) {
+  const code = `triggerMove("up");`;
+  return code;
+}
+
+const down = {
+  init: function () {
+    this.appendEndRowInput('down')
+      .appendField('down');
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip('going to move down');
+    this.setHelpUrl('');
+    this.setColour(225);
+  }
+};
+
+Blockly.common.defineBlocks({ down: down });
+
+javascriptGenerator.forBlock['down'] = function (block, generator) {
+  const code = `triggerMove("down");`;
   return code;
 }
